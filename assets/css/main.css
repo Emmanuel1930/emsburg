@@ -432,7 +432,7 @@ h6 {
   background-color: var(--background-color);
   color: var(--default-color);
   padding: 60px 0;
-  font-size: 14px;
+  font-size: 15px;
   border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 80%);
 }
 
@@ -470,6 +470,9 @@ h6 {
   border-color: var(--accent-color);
   background-color: transparent;
   color: var(--accent-color) !important;
+}
+#unique-widget .widget-heading {
+  font-size: 30px; /* Custom font size for this specific widget heading */
 }
 
 .footer .widget .widget-heading {
@@ -782,18 +785,7 @@ section,
 /*--------------------------------------------------------------
 # About 2 Section
 --------------------------------------------------------------*/
-.about-2 .content {
-  background-color: var(--surface-color);
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
 
-.about-2 .content-subtitle {
-  font-size: 15px;
-  margin-bottom: 10px;
-  display: block;
-  color: var(--default-color);
-}
 
 .about-2 .content-title {
   color: var(--heading-color);
@@ -801,7 +793,7 @@ section,
   margin-bottom: 30px;
 }
 
-.about-2 p {
+/* .about-2 p {
   line-height: 1.7;
   color: var(--default-color);
 }
@@ -827,7 +819,23 @@ section,
   font-size: 18px;
   font-weight: normal;
   color: var(--default-color);
+} */
+.hero-section {
+  background: url('./assets/img/hero.jpg') center center/cover no-repeat;
+  position: relative;
+  overflow: hidden;
 }
+
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
 
 /*--------------------------------------------------------------
 # Services Section
@@ -855,6 +863,7 @@ section,
 /*--------------------------------------------------------------
 # Stats Section
 --------------------------------------------------------------*/
+/* General Stats Section Styles */
 .stats {
   padding-top: 60px;
 }
@@ -884,6 +893,7 @@ section,
   color: var(--default-color);
 }
 
+/* Button Styles */
 .stats .btn-get-started {
   background-color: var(--accent-color);
   color: var(--contrast-color);
@@ -892,6 +902,8 @@ section,
   border: 2px solid transparent;
   transition: 0.3s all ease-in-out;
   font-size: 14px;
+  display: inline-block;
+  margin-top: 20px;
 }
 
 .stats .btn-get-started:hover {
@@ -900,24 +912,47 @@ section,
   color: var(--accent-color);
 }
 
-.stats .count-numbers .number {
-  font-size: 1.8rem;
-  color: var(--heading-color);
-  position: relative;
-  display: block;
-  padding-bottom: 7px;
-  margin-bottom: 10px;
+/* Pagination (Switch) Styles */
+.swiper-pagination {
+  position: absolute;
+  bottom: 10px; /* Adjust this to control distance from the images */
+  text-align: center;
+  width: 100%;
+  z-index: 10;
 }
 
-.stats .count-numbers .number:after {
-  content: "";
-  left: 0;
-  bottom: 0;
-  position: absolute;
-  width: 20px;
-  height: 2px;
-  background: var(--accent-color);
+.swiper-pagination .swiper-pagination-bullet {
+  background: #ffffff;
+  opacity: 0.5;
+  margin: 0 5px;
 }
+
+.swiper-pagination .swiper-pagination-bullet-active {
+  background: var(--accent-color);
+  opacity: 1;
+}
+
+/* Swiper Container and Slide Styles */
+.swiper-container {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  margin-bottom: 30px; /* Adds spacing between the slider and the text */
+}
+
+.swiper-slide {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
 
 /*--------------------------------------------------------------
 # Blog Posts Section
