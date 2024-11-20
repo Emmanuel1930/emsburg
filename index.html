@@ -275,20 +275,63 @@
           <div class="widget">
             <div class="footer-subscribe">
               <h3 class="widget-heading">Subscribe</h3>
-              <form action="forms/newsletter.php" method="post" class="php-email-form">
+              <form 
+                id="newsletter-form" 
+                action="https://formspree.io/f/mldellwp" 
+                method="POST"
+                class="php-email-form"
+              >
                 <div class="mb-2">
-                  <input type="text" class="form-control" name="email" placeholder="Enter your email">
-
+                  <input 
+                    type="email" 
+                    class="form-control" 
+                    name="email" 
+                    placeholder="Enter your email" 
+                    required
+                  >
                   <button type="submit" class="btn btn-link">
                     <span class="bi bi-arrow-right"></span>
                   </button>
                 </div>
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">
-                  Your subscription request has been sent. Thank you!
-                </div>
+                <div id="newsletter-form-status" class="my-3"></div>
               </form>
+          
+              <script>
+                var newsletterForm = document.getElementById("newsletter-form");
+          
+                async function handleNewsletterSubmit(event) {
+                  event.preventDefault();
+                  var status = document.getElementById("newsletter-form-status");
+                  var data = new FormData(event.target);
+                  fetch(event.target.action, {
+                    method: newsletterForm.method,
+                    body: data,
+                    headers: {
+                      'Accept': 'application/json'
+                    }
+                  }).then(response => {
+                    if (response.ok) {
+                      status.innerHTML = "<div class='sent-message'>Your subscription request has been sent. Thank you!</div>";
+                      newsletterForm.reset();
+                    } else {
+                      response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                          status.innerHTML = `<div class='error-message'>${data["errors"].map(error => error["message"]).join(", ")}</div>`;
+                        } else {
+                          status.innerHTML = "<div class='error-message'>Oops! There was a problem submitting your subscription.</div>";
+                        }
+                      });
+                    }
+                  }).catch(error => {
+                    status.innerHTML = "<div class='error-message'>Oops! There was a problem submitting your subscription.</div>";
+                  });
+                }
+          
+                newsletterForm.addEventListener("submit", handleNewsletterSubmit);
+              </script>
+            </div>
+          </div>
+          
             </div>
           </div>
         </div>
