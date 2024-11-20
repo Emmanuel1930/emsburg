@@ -96,26 +96,53 @@
 
           </div>
           <div class="col-lg-8">
-            <form 
-              id="my-form" 
-              action="https://formspree.io/f/mldellwp" 
-              method="POST" 
+            <form
+              id="my-form"
+              action="https://formspree.io/f/mldellwp"
+              method="POST"
               role="form"
               class="php-email-form"
             >
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                  <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    id="name"
+                    placeholder="Your Name"
+                    required
+                  />
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    id="email"
+                    placeholder="Your Email"
+                    required
+                  />
                 </div>
               </div>
               <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="subject"
+                  id="subject"
+                  placeholder="Subject"
+                  required
+                />
               </div>
               <div class="form-group mt-3">
-                <textarea class="form-control" name="message" placeholder="Message" required></textarea>
+                <textarea
+                  class="form-control"
+                  name="message"
+                  id="message"
+                  placeholder="Message"
+                  required
+                ></textarea>
               </div>
               <!-- Status message for form submission -->
               <div id="my-form-status" class="my-3"></div>
@@ -126,33 +153,47 @@
           
             <script>
               var form = document.getElementById("my-form");
-              
+          
               async function handleSubmit(event) {
                 event.preventDefault();
                 var status = document.getElementById("my-form-status");
                 var data = new FormData(event.target);
+          
+                // Show a loading indicator during form submission
+                status.innerHTML = "<div class='loading'>Sending...</div>";
+          
                 fetch(event.target.action, {
                   method: form.method,
                   body: data,
                   headers: {
-                    'Accept': 'application/json'
-                  }
-                }).then(response => {
-                  if (response.ok) {
-                    status.innerHTML = "<div class='sent-message'>Your message has been sent. Thank you!</div>";
-                    form.reset();
-                  } else {
-                    response.json().then(data => {
-                      if (Object.hasOwn(data, 'errors')) {
-                        status.innerHTML = `<div class='error-message'>${data["errors"].map(error => error["message"]).join(", ")}</div>`;
-                      } else {
-                        status.innerHTML = "<div class='error-message'>Oops! There was a problem submitting your form.</div>";
-                      }
-                    });
-                  }
-                }).catch(error => {
-                  status.innerHTML = "<div class='error-message'>Oops! There was a problem submitting your form.</div>";
-                });
+                    Accept: "application/json",
+                  },
+                })
+                  .then((response) => {
+                    if (response.ok) {
+                      // Success message
+                      status.innerHTML =
+                        "<div class='sent-message'>Your message has been sent. Thank you!</div>";
+                      form.reset();
+                    } else {
+                      response.json().then((data) => {
+                        if (Object.hasOwn(data, "errors")) {
+                          status.innerHTML = `<div class='error-message'>${data[
+                            "errors"
+                          ]
+                            .map((error) => error["message"])
+                            .join(", ")}</div>`;
+                        } else {
+                          status.innerHTML =
+                            "<div class='error-message'>Oops! There was a problem submitting your form.</div>";
+                        }
+                      });
+                    }
+                  })
+                  .catch((error) => {
+                    status.innerHTML =
+                      "<div class='error-message'>Oops! There was a problem submitting your form.</div>";
+                  });
               }
           
               form.addEventListener("submit", handleSubmit);
@@ -211,70 +252,25 @@
             </ul>
           </div>
 
-          <div class="widget">
+          <!-- <div class="widget">
             <div class="footer-subscribe">
               <h3 class="widget-heading">Subscribe</h3>
-              <form 
-                id="newsletter-form" 
-                action="https://formspree.io/f/mldellwp" 
-                method="POST" 
-              >
+              <form action="forms/newsletter.php" method="post" class="php-email-form">
                 <div class="mb-2">
-                  <input 
-                    type="email" 
-                    class="form-control" 
-                    name="email" 
-                    placeholder="Enter your email" 
-                    required
-                  >
+                  <input type="text" class="form-control" name="email" placeholder="Enter your email">
+
                   <button type="submit" class="btn btn-link">
                     <span class="bi bi-arrow-right"></span>
                   </button>
                 </div>
-                <div id="newsletter-form-status" class="my-3"></div>
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">
+                  Your subscription request has been sent. Thank you!
+                </div>
               </form>
-          
-              <script>
-                var newsletterForm = document.getElementById("newsletter-form");
-          
-                async function handleNewsletterSubmit(event) {
-                  event.preventDefault();
-                  var status = document.getElementById("newsletter-form-status");
-                  var data = new FormData(event.target);
-                  fetch(event.target.action, {
-                    method: newsletterForm.method,
-                    body: data,
-                    headers: {
-                      'Accept': 'application/json'
-                    }
-                  }).then(response => {
-                    if (response.ok) {
-                      status.innerHTML = "<div class='sent-message'>Your subscription request has been sent. Thank you!</div>";
-                      newsletterForm.reset();
-                    } else {
-                      response.json().then(data => {
-                        if (Object.hasOwn(data, 'errors')) {
-                          status.innerHTML = `<div class='error-message'>${data["errors"].map(error => error["message"]).join(", ")}</div>`;
-                        } else {
-                          status.innerHTML = "<div class='error-message'>Oops! There was a problem submitting your subscription.</div>";
-                        }
-                      });
-                    }
-                  }).catch(error => {
-                    status.innerHTML = "<div class='error-message'>Oops! There was a problem submitting your subscription.</div>";
-                  });
-                }
-          
-                newsletterForm.addEventListener("submit", handleNewsletterSubmit);
-              </script>
-            </div>
           </div>
-          
-          
-              </form>
-            </div>
-          </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </footer>
