@@ -95,69 +95,6 @@
     });
   }
   window.addEventListener('load', aosInit);
-
-
-  // Get the form element
-var form = document.getElementById("my-form");
-
-// Handle the form submission
-async function handleSubmit(event) {
-  event.preventDefault(); // Prevent default form submission
-  var status = document.getElementById("my-form-status"); // Status message container
-  var data = new FormData(event.target); // Form data
-  var loadingMessage = "<div class='loading'>Submitting...</div>";
-
-  // Show loading message
-  status.innerHTML = loadingMessage;
-  document.querySelector(".loading").style.display = "block";
-
-  // Submit the form using Fetch API
-  fetch(event.target.action, {
-    method: form.method,
-    body: data,
-    headers: {
-      "Accept": "application/json",
-    },
-  })
-    .then((response) => {
-      if (response.ok) {
-        // Show success message
-        status.innerHTML =
-          "<div class='sent-message'>Your message has been sent. Thank you!</div>";
-        document.querySelector(".sent-message").style.display = "block";
-        form.reset(); // Reset the form
-      } else {
-        response.json().then((data) => {
-          if (Object.hasOwn(data, "errors")) {
-            // Show error message from server
-            status.innerHTML = `<div class='error-message'>${data["errors"]
-              .map((error) => error["message"])
-              .join(", ")}</div>`;
-          } else {
-            // Generic error message
-            status.innerHTML =
-              "<div class='error-message'>Oops! There was a problem submitting your form.</div>";
-          }
-          document.querySelector(".error-message").style.display = "block";
-        });
-      }
-    })
-    .catch((error) => {
-      // Handle network errors
-      status.innerHTML =
-        "<div class='error-message'>Oops! There was a problem submitting your form.</div>";
-      document.querySelector(".error-message").style.display = "block";
-    })
-    .finally(() => {
-      // Hide loading message after completion
-      document.querySelector(".loading").style.display = "none";
-    });
-}
-
-// Attach the event listener to the form
-form.addEventListener("submit", handleSubmit);
-
-
   /**
    * Init swiper sliders
    */
@@ -235,6 +172,7 @@ form.addEventListener("submit", handleSubmit);
   window.addEventListener("load", initSwiperTabs);
   
   
+  
 
   /**
    * Initiate glightbox
@@ -257,6 +195,66 @@ form.addEventListener("submit", handleSubmit);
     });
   });
   
+    // Get the form element
+var form = document.getElementById("my-form");
+
+// Handle the form submission
+async function handleSubmit(event) {
+  event.preventDefault(); // Prevent default form submission
+  var status = document.getElementById("my-form-status"); // Status message container
+  var data = new FormData(event.target); // Form data
+  var loadingMessage = "<div class='loading'>Submitting...</div>";
+
+  // Show loading message
+  status.innerHTML = loadingMessage;
+  document.querySelector(".loading").style.display = "block";
+
+  // Submit the form using Fetch API
+  fetch(event.target.action, {
+    method: form.method,
+    body: data,
+    headers: {
+      "Accept": "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        // Show success message
+        status.innerHTML =
+          "<div class='sent-message'>Your message has been sent. Thank you!</div>";
+        document.querySelector(".sent-message").style.display = "block";
+        form.reset(); // Reset the form
+      } else {
+        response.json().then((data) => {
+          if (Object.hasOwn(data, "errors")) {
+            // Show error message from server
+            status.innerHTML = `<div class='error-message'>${data["errors"]
+              .map((error) => error["message"])
+              .join(", ")}</div>`;
+          } else {
+            // Generic error message
+            status.innerHTML =
+              "<div class='error-message'>Oops! There was a problem submitting your form.</div>";
+          }
+          document.querySelector(".error-message").style.display = "block";
+        });
+      }
+    })
+    .catch((error) => {
+      // Handle network errors
+      status.innerHTML =
+        "<div class='error-message'>Oops! There was a problem submitting your form.</div>";
+      document.querySelector(".error-message").style.display = "block";
+    })
+    .finally(() => {
+      // Hide loading message after completion
+      document.querySelector(".loading").style.display = "none";
+    });
+}
+
+// Attach the event listener to the form
+form.addEventListener("submit", handleSubmit);
+
   /**
    * Init isotope layout and filters
    */
