@@ -78,34 +78,42 @@ h6 {
 
 /* PHP Email Form Messages
 ------------------------------*/
+/* Error Message */
 .php-email-form .error-message {
-  display: none;
+  display: none; /* This is fine for errors */
   background: #df1529;
   color: #ffffff;
   text-align: left;
   padding: 15px;
   margin-bottom: 24px;
   font-weight: 600;
+  border-radius: 5px; /* Optional: Rounded corners */
 }
 
+/* Success Message */
 .php-email-form .sent-message {
-  display: none;
-  color: #ffffff;
+  display: none; /* Set this to block after submission */
+  color: #ffffff; /* Ensure text color contrasts with background */
   background: #059652;
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 24px;
+  font-weight: 600;
+  border-radius: 5px; /* Optional: Rounded corners */
+  font-size: 16px; /* Increase readability */
+}
+
+/* Loading Message */
+.php-email-form .loading {
+  display: none; /* Initially hidden */
+  background: var(--surface-color);
   text-align: center;
   padding: 15px;
   margin-bottom: 24px;
   font-weight: 600;
 }
 
-.php-email-form .loading {
-  display: none;
-  background: var(--surface-color);
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 24px;
-}
-
+/* Spinner */
 .php-email-form .loading:before {
   content: "";
   display: inline-block;
@@ -122,11 +130,11 @@ h6 {
   0% {
     transform: rotate(0deg);
   }
-
   100% {
     transform: rotate(360deg);
   }
 }
+
 
 /*--------------------------------------------------------------
 # Global Header
