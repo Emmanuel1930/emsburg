@@ -803,33 +803,7 @@ section,
   margin-bottom: 30px;
 }
 
-/* .about-2 p {
-  line-height: 1.7;
-  color: var(--default-color);
-}
 
-.about-2 .btn-get-started {
-  background-color: var(--accent-color);
-  color: var(--contrast-color);
-  border-radius: 30px;
-  padding: 8px 30px;
-  border: 2px solid transparent;
-  transition: 0.3s all ease-in-out;
-  font-size: 14px;
-}
-
-.about-2 .btn-get-started:hover {
-  border-color: var(--accent-color);
-  background-color: transparent;
-  color: var(--accent-color);
-}
-
-.about-2 .lead {
-  line-height: 1.6;
-  font-size: 18px;
-  font-weight: normal;
-  color: var(--default-color);
-} */
 .hero-section {
   background: url('./assets/img/hero.jpg') center center/cover no-repeat;
   position: relative;
